@@ -28,7 +28,7 @@ legend.onAdd = function () {
     "#ea822c",
     "#ea2c2c"];
 
-  //  container.innerHTML += "<p><b>Depth</b></p>"
+   container.innerHTML += "<p><b>Depth</b></p>"
 
   for (var i = 0; i < depths.length; i++) {
     // console.log("LOOP", depths[i], colours[i]);
@@ -78,13 +78,10 @@ function createStyle(feature) {
   }
 };
 
-
-
-
-
   L.geoJson(earthquakeData, {
     pointToLayer: function (feature, coordinates) {
-      return L.circleMarker(coordinates);
+      return L.circleMarker(coordinates).bindPopup(("<h3>" + feature.properties.place +
+      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>" + "<h4> Magnitude: " + feature.properties.mag +"</h4>"))
     },
     style: createStyle
   }).addTo(map);
